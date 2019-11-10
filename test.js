@@ -20,11 +20,11 @@ test('Game created successfully', async t => {
 
 test('Game returns score', async t => {
     const game = new Game();
-    t.deepEqual(game.score, [0,0]);
+    t.is(game.score, '0-0');
 });
 
 test('Game point adding updates score', async t => {
     const game = new Game();
     game.addPoint(0);
-    t.deepEqual(game.score, [1,0]);
+    t.is(game.score, '15-0');
 });
