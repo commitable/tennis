@@ -127,3 +127,29 @@ test('Set win conditions work', async t => {
     t.is(set.score, '6-0');
     t.is(set.winner, 0);
 });
+
+test('Match returns correct score', async t => {
+    const match = new Match('player 1', 'player 2');
+    match.pointWonBy('player 1');
+    match.pointWonBy('player 2');
+
+    t.is(match.score(), '0-0, 15-15');
+
+    match.pointWonBy('player 1');
+    match.pointWonBy('player 1');
+
+    t.is(match.score(), '0-0, 40-15');
+
+    match.pointWonBy('player 2');
+    match.pointWonBy('player 2');
+
+    t.is(match.score(), '0-0, Deuce');
+
+    match.pointWonBy('player 1');
+
+    t.is(match.score(), '0-0, Advantage Player 1');
+
+    match.pointWonBy('player 1');
+
+    t.is(match.score(), '1-0');
+});
