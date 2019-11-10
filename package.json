@@ -1,0 +1,15 @@
+{
+  "name": "code-test-tennis",
+  "version": "1.0.0",
+  "description": "Basic tennis scoring system",
+  "main": "index.js",
+  "scripts": {
+    "test": "ava"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ava": "^2.4.0"
+  }
+}
