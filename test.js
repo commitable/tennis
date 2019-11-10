@@ -38,8 +38,6 @@ test('Game point special conditions return correctly', async t => {
     game.addPoint(0);
     game.addPoint(0);
     game.addPoint(0);
-    game.addPoint(0);
-    game.addPoint(1);
     game.addPoint(1);
     game.addPoint(1);
     game.addPoint(1);
@@ -50,4 +48,26 @@ test('Game point special conditions return correctly', async t => {
     t.is(game.score, 'Deuce');
     game.addPoint(1);
     t.is(game.score, 'Advantage Player 2');
+});
+
+test('Game winner correctly set', async t => {
+    const game = new Game();
+    game.addPoint(0);
+    game.addPoint(0);
+    game.addPoint(0);
+    game.addPoint(1);
+    game.addPoint(1);
+    game.addPoint(1);
+    t.is(game.score, 'Deuce');
+    game.addPoint(0);
+    t.is(game.score, 'Advantage Player 1');
+    game.addPoint(0);
+    t.is(game.winner, 0);
+
+    const game2 = new Game();
+    game2.addPoint(1);
+    game2.addPoint(1);
+    game2.addPoint(1);
+    game2.addPoint(1);
+    t.is(game2.winner, 1);
 });

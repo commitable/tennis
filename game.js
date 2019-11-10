@@ -4,10 +4,18 @@ class Game {
 
     constructor() {
         this._score = [0,0];
+        this._winner = null;
     }
 
     addPoint(playerIndex) {
         this._score[playerIndex] += 1;
+
+        // Game winning conditions
+        if (this._score[0] >= 3 && this._score[1] >= 3 && Math.abs(this._score[0] - this._score[1]) >= 2) {
+            this.winner = this._score.indexOf(Math.max(...this._score));
+        } else if (this._score[playerIndex] >= 4) {
+            this.winner = playerIndex;
+        }
     }
 
     formatPoints(points) {
@@ -35,6 +43,14 @@ class Game {
         }
 
         return `${this.formatPoints(this._score[0])}-${this.formatPoints(this._score[1])}`;
+    }
+
+    set winner(playerIndex) {
+        this._winner = playerIndex;
+    }
+
+    get winner() {
+        return this._winner;
     }
 }
 

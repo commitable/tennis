@@ -8,6 +8,10 @@ class Set {
         this.games = [new Game()];
     }
 
+    addPoint(playerIndex) {
+
+    }
+
 }
 
 module.exports = {
