@@ -96,3 +96,34 @@ test('Set score increment works', async t => {
     set.addPoint(0);
     t.is(set.score, '1-0');
 });
+
+test('Set win conditions work', async t => {
+    const set = new Set();
+    set.addPoint(0);
+    set.addPoint(0);
+    set.addPoint(0);
+    set.addPoint(0);
+    set.addPoint(0);
+    set.addPoint(0);
+    set.addPoint(0);
+    set.addPoint(0);
+    set.addPoint(0);
+    set.addPoint(0);
+    set.addPoint(0);
+    set.addPoint(0);
+    set.addPoint(0);
+    set.addPoint(0);
+    set.addPoint(0);
+    set.addPoint(0);
+    set.addPoint(0);
+    set.addPoint(0);
+    set.addPoint(0);
+    set.addPoint(0);
+    set.addPoint(0);
+    set.addPoint(0);
+    set.addPoint(0);
+    set.addPoint(0);
+
+    t.is(set.score, '6-0');
+    t.is(set.winner, 0);
+});
