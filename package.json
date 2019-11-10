@@ -4,7 +4,7 @@
   "description": "Basic tennis scoring system",
   "main": "index.js",
   "scripts": {
-    "test": "ava"
+    "test": "ava ./test/*.test.js"
   },
   "keywords": [],
   "author": "",
