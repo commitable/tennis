@@ -5,7 +5,7 @@ const { Set } = require('./set');
 class Match {
     constructor(player1, player2) {
         this.players = [player1, player2];
-        this.sets = [new Set()];
+        this.sets = [new Set(this.players)];
     }
 
     pointWonBy(playerName) {

@@ -1,34 +1,42 @@
 'use strict';
 
 class Game {
-
-    constructor(type = 'standard') {
+    constructor(players) {
+        this.players = players;
         this._score = [0,0];
         this._winner = null;
-        this._type = type;
     }
 
     addPoint(playerIndex) {
-
         if (this.winner) {
             throw new Error('Cannot add point, game has already concluded.');
         }
 
         this._score[playerIndex] += 1;
+        this.updateState();
+    }
 
-        // Game winning conditions
-        if (this._score[0] >= 3 && this._score[1] >= 3 && Math.abs(this._score[0] - this._score[1]) >= 2) {
-            this.winner = this._score.indexOf(Math.max(...this._score));
-        } else if (this._score[0] >= 4 && this._score[1] < 3 || this._score[1] >= 4 && this._score[0] < 3) {
-            this.winner = this._score.indexOf(Math.max(...this._score));
+    updateState() {
+        if (Math.abs(this._score[0] - this._score[1]) >= 2 && (this._score[0] >= 4 || this._score[1] >= 4)) {
+            this.winner = this.getLeadingPlayerIndex();
         }
     }
 
-    formatPoints(points) {
-        if (this._type === 'tie-break') {
-            return points;
+    get score() {
+        if (this.winner !== null) {
+            return '';
+        } else if (this._score[0] >= 3 && this._score[1] >= 3) {
+            if(this._score[0] === this._score[1]) {
+                return 'Deuce';
+            } else {
+                return `Advantage ${this.players[this.getLeadingPlayerIndex()]}`;
+            }
         }
 
+        return `${this.convertPoints(this._score[0])}-${this.convertPoints(this._score[1])}`;
+    }
+
+    convertPoints(points) {
         switch(points) {
             case 0:
                 return '0';
@@ -41,20 +49,8 @@ class Game {
         }
     }
 
-    get score() {
-        if (this.winner !== null) {
-            return '';
-        } else if (this._score[0] >= 3 && this._score[1] >= 3) {
-            if(this._score[0] === this._score[1]) {
-                return 'Deuce';
-            } else if (this._score[0] > this._score[1]) {
-                return 'Advantage Player 1';
-            } else if (this._score[1] > this._score[0]) {
-                return 'Advantage Player 2';
-            }
-        }
-
-        return `${this.formatPoints(this._score[0])}-${this.formatPoints(this._score[1])}`;
+    getLeadingPlayerIndex() {
+        return this._score.indexOf(Math.max(...this._score));
     }
 
     set winner(playerIndex) {

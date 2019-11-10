@@ -1,20 +1,13 @@
 'use strict';
 
 const { Game } = require('./game');
+const { GameTiebreak } = require('./game-tiebreak');
 
 class Set {
-
-    constructor() {
-        this.games = [new Game()];
-        this._winner = null;
-    }
-
-    set winner(playerIndex) {
-        this._winner = playerIndex;
-    }
-
-    get winner() {
-        return this._winner;
+    constructor(players) {
+        this.winner = null;
+        this.players = players;
+        this.games = [new Game(this.players)];
     }
 
     addPoint(playerIndex) {
@@ -29,17 +22,14 @@ class Set {
 
             if(latestGame.winner !== null) {
                 const score = this.getFinishedGamesScore();
-                //Win conditions here
-                if(score[0] === 7 || score[1] === 7) {
-                    this.winner = score.indexOf(Math.max(...score));
-                } else if ((score[0] >= 6 || score[1] >= 6) && Math.abs(score[0] - score[1]) >= 2) {
+
+                if(score[0] === 7 || score[1] === 7 || ((score[0] === 6 || score[1] === 6) && Math.abs(score[0] - score[1]) >= 2)) {
                     this.winner = score.indexOf(Math.max(...score));
                 }
             }
         } else {
             const score = this.getFinishedGamesScore();
-            const gameType = (score[0] === 6 && score[1] === 6) ? 'tie-break' : 'standard';
-            const newGame = new Game(gameType);
+            const newGame = (score[0] === 6 && score[1] === 6) ? new GameTiebreak(this.players) : new Game(this.players);
             newGame.addPoint(playerIndex);
             this.games.push(newGame);
         }
