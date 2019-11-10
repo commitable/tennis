@@ -83,3 +83,16 @@ test('Tie-break game score formatting is correct', async t => {
     game.addPoint(1);
     t.is(game.score, '1-2');
 });
+
+
+test('Set score increment works', async t => {
+    const set = new Set();
+    set.addPoint(0);
+    t.is(set.score, '0-0, 15-0');
+    set.addPoint(0);
+    t.is(set.score, '0-0, 30-0');
+    set.addPoint(0);
+    t.is(set.score, '0-0, 40-0');
+    set.addPoint(0);
+    t.is(set.score, '1-0');
+});
