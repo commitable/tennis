@@ -2,9 +2,10 @@
 
 class Game {
 
-    constructor() {
+    constructor(type = 'standard') {
         this._score = [0,0];
         this._winner = null;
+        this._type = type;
     }
 
     addPoint(playerIndex) {
@@ -24,6 +25,10 @@ class Game {
     }
 
     formatPoints(points) {
+        if (this._type === 'tie-break') {
+            return points;
+        }
+
         switch(points) {
             case 0:
                 return '0';

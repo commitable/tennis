@@ -75,3 +75,11 @@ test('Game winner correctly set', async t => {
         game2.addPoint(1);
     }, Error);
 });
+
+test('Tie-break game score formatting is correct', async t => {
+    const game = new Game('tie-break');
+    game.addPoint(0);
+    game.addPoint(1);
+    game.addPoint(1);
+    t.is(game.score, '1-2');
+});
