@@ -19,7 +19,7 @@ class Game {
         // Game winning conditions
         if (this._score[0] >= 3 && this._score[1] >= 3 && Math.abs(this._score[0] - this._score[1]) >= 2) {
             this.winner = this._score.indexOf(Math.max(...this._score));
-        } else if (this._score[0] >= 4 || this._score[1] >= 4) {
+        } else if (this._score[0] >= 4 && this._score[1] < 3 || this._score[1] >= 4 && this._score[0] < 3) {
             this.winner = this._score.indexOf(Math.max(...this._score));
         }
     }
@@ -42,7 +42,9 @@ class Game {
     }
 
     get score() {
-        if (this._score[0] >= 3 && this._score[1] >= 3) {
+        if (this.winner !== null) {
+            return '';
+        } else if (this._score[0] >= 3 && this._score[1] >= 3) {
             if(this._score[0] === this._score[1]) {
                 return 'Deuce';
             } else if (this._score[0] > this._score[1]) {
