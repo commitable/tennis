@@ -1,3 +1,5 @@
+'use strict';
+
 import test from 'ava';
 const { Set }  = require('../set');
 
