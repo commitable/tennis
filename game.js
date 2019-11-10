@@ -8,13 +8,18 @@ class Game {
     }
 
     addPoint(playerIndex) {
+
+        if (this.winner) {
+            throw new Error('Cannot add point, game has already concluded.');
+        }
+
         this._score[playerIndex] += 1;
 
         // Game winning conditions
         if (this._score[0] >= 3 && this._score[1] >= 3 && Math.abs(this._score[0] - this._score[1]) >= 2) {
             this.winner = this._score.indexOf(Math.max(...this._score));
-        } else if (this._score[playerIndex] >= 4) {
-            this.winner = playerIndex;
+        } else if (this._score[0] >= 4 || this._score[1] >= 4) {
+            this.winner = this._score.indexOf(Math.max(...this._score));
         }
     }
 

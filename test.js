@@ -70,4 +70,8 @@ test('Game winner correctly set', async t => {
     game2.addPoint(1);
     game2.addPoint(1);
     t.is(game2.winner, 1);
+
+    t.throws(() => {
+        game2.addPoint(1);
+    }, Error);
 });
