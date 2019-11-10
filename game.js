@@ -3,10 +3,16 @@
 class Game {
 
     constructor() {
-        this.player1Score = 0;
-        this.player2Score = 0;
+        this._score = [0,0];
     }
 
+    addPoint(playerIndex) {
+        this.score[playerIndex] += 1;
+    }
+
+    get score() {
+        return this._score;
+    }
 }
 
 module.exports = {

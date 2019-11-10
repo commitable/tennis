@@ -17,3 +17,14 @@ test('Game created successfully', async t => {
     const game = new Game();
     t.true(game instanceof Game);
 });
+
+test('Game returns score', async t => {
+    const game = new Game();
+    t.deepEqual(game.score, [0,0]);
+});
+
+test('Game point adding updates score', async t => {
+    const game = new Game();
+    game.addPoint(0);
+    t.deepEqual(game.score, [1,0]);
+});
