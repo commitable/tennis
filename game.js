@@ -24,6 +24,16 @@ class Game {
     }
 
     get score() {
+        if (this._score[0] >= 3 && this._score[1] >= 3) {
+            if(this._score[0] === this._score[1]) {
+                return 'Deuce';
+            } else if (this._score[0] > this._score[1]) {
+                return 'Advantage Player 1';
+            } else if (this._score[1] > this._score[0]) {
+                return 'Advantage Player 2';
+            }
+        }
+
         return `${this.formatPoints(this._score[0])}-${this.formatPoints(this._score[1])}`;
     }
 }

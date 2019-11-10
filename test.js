@@ -27,4 +27,27 @@ test('Game point adding updates score', async t => {
     const game = new Game();
     game.addPoint(0);
     t.is(game.score, '15-0');
+    game.addPoint(0);
+    t.is(game.score, '30-0');
+    game.addPoint(0);
+    t.is(game.score, '40-0');
+});
+
+test('Game point special conditions return correctly', async t => {
+    const game = new Game();
+    game.addPoint(0);
+    game.addPoint(0);
+    game.addPoint(0);
+    game.addPoint(0);
+    game.addPoint(1);
+    game.addPoint(1);
+    game.addPoint(1);
+    game.addPoint(1);
+    t.is(game.score, 'Deuce');
+    game.addPoint(0);
+    t.is(game.score, 'Advantage Player 1');
+    game.addPoint(1);
+    t.is(game.score, 'Deuce');
+    game.addPoint(1);
+    t.is(game.score, 'Advantage Player 2');
 });
